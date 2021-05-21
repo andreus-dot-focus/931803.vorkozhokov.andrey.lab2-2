@@ -1,0 +1,88 @@
+﻿@model WebApplication2.Models.CalculateViewModel
+@{
+    ViewBag.Title = "Hello Forms";
+}
+
+<h2>ModelBindingInParameters</h2>
+
+<form asp-action="ModelBindingInParameters">
+    <div class="row">
+        <div class="form-group col-12">
+            @if (ViewBag.Number1Null == null && ViewBag.ErrorParse1 == null)
+            {
+                <input type="number" name="Number1" class="form-control" value="@ViewBag.Number1" />
+            }
+            else if (ViewBag.ErrorParse1 != null)
+            {
+                <input type="number" name="Number1" class="form-control input-validation-error" value="@ViewBag.Number1" />
+                <span class="field-validation-error">@ViewBag.ErrorParse1</span>
+            }
+            else
+            {
+                <input type="number" name="Number1" class="form-control input-validation-error" value="@ViewBag.Number1" />
+                <span class="field-validation-error">@ViewBag.Number1Null</span>
+            }
+        </div>
+        <div class="form-group col-12" style="width:70px;">
+            <select type="text" name="Operation" class="form-control">
+                @if (ViewBag.Operation == "-")
+                {
+                    <option>+</option>
+                    <option selected>-</option>
+                    <option>*</option>
+                    <option>/</option>
+                }
+                else if (ViewBag.Operation == "*")
+                {
+                    <option>+</option>
+                    <option>-</option>
+                    <option selected>*</option>
+                    <option>/</option>
+                }
+                else if (ViewBag.Operation == "/")
+                {
+                    <option>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option selected>/</option>
+                }
+                else
+                {
+                    <option selected>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option>/</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-12">
+            @if (ViewBag.DividedByZero == null && ViewBag.Number2Null == null && ViewBag.ErrorParse2 == null)
+            {
+                <input type="number" name="Number2" class="form-control" value="@ViewBag.Number2" />
+            }
+            else if (ViewBag.ErrorParse2 != null)
+            {
+                <input type="number" name="Number2" class="form-control input-validation-error" value="@ViewBag.Number2" />
+                <span class="field-validation-error">@ViewBag.ErrorParse2</span>
+            }
+            else if (ViewBag.DividedByZero != null)
+            {
+                <input type="number" name="Number2" class="form-control input-validation-error" value="@ViewBag.Number2" />
+                <span class="field-validation-error">@ViewBag.DividedByZero</span>
+            }
+            else
+            {
+                <input type="number" name="Number2" class="form-control input-validation-error" value="@ViewBag.Number2" />
+                <span class="field-validation-error">@ViewBag.Number2Null</span>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary col-12" style="background-color:gray; border-color:gray;">submit</button>
+        <div style="font-size : 20px" class="form-group col-12">
+            @if (Model != null)
+            {
+                <h2>Result</h2>
+                <p>@ViewBag.Number1 @ViewBag.Operation @ViewBag.Number2 = @Model.ResultNumber</p>
+            }
+        </div>
+    </div>
+</form>
